@@ -12613,18 +12613,18 @@ duplicate. All others seem to be different movies, they have different director 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC360F6EB8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC361594E0&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC36184780&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC361AA9E8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC361D3C50&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC361FCDA0&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC3622F048&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC362572E8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC36257320&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC362A7780&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC362D09E8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CC362F9C50&gt;]],
+<pre>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF193E7400&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1C9E9668&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CA11898&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CA39B00&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CA62D68&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CA8CEB8&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CABC160&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CAE5400&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CAE5438&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CB36898&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CB5EB00&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001CF1CB88D68&gt;]],
       dtype=object)</pre>
 </div>
 
@@ -12815,7 +12815,8 @@ First we want to remove duplicates.</p>
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;runtime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># calculate average runtime and rewrite 0&#39;s with that value</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;runtime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;runtime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;runtime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mean</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 
@@ -12984,10 +12985,12 @@ First we want to remove duplicates.</p>
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">short</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;runtime &lt; 70&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># define subsets for short, middle length and long movies</span>
+<span class="n">short</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;runtime &lt; 70&quot;</span><span class="p">)</span>
 <span class="n">mid_len</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;70 &lt;= runtime &lt;= 90&quot;</span><span class="p">)</span>
 <span class="n">long</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;runtime &gt; 90&quot;</span><span class="p">)</span>
 
+<span class="c1"># plot them</span>
 <span class="n">rating_hist</span><span class="p">(</span>
     <span class="n">long</span><span class="p">,</span>
     <span class="n">mid_len</span><span class="p">,</span>
@@ -13049,10 +13052,12 @@ In this dataset short movies more likely would get higher user rating and middle
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">old</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;release_year &lt; 2000&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># define subsets for groups of movies by release year</span>
+<span class="n">old</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;release_year &lt; 2000&quot;</span><span class="p">)</span>
 <span class="n">early2000s</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;2000 &lt;= release_year &lt;= 2010&quot;</span><span class="p">)</span>
 <span class="n">new</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;release_year &gt; 2010&quot;</span><span class="p">)</span>
 
+<span class="c1"># plot them</span>
 <span class="n">rating_hist</span><span class="p">(</span>
     <span class="n">old</span><span class="p">,</span>
     <span class="n">early2000s</span><span class="p">,</span>
@@ -13123,10 +13128,15 @@ Older movies got a little bit higher rating and newer movies got lower rating.</
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;genre&quot;</span><span class="p">,</span><span class="s2">&quot;year&quot;</span><span class="p">,</span><span class="s2">&quot;vote_average&quot;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a new DataFrame with 3 columns: &quot;genre&quot;,&quot;year&quot;,&quot;vote_average&quot;</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;genre&quot;</span><span class="p">,</span><span class="s2">&quot;year&quot;</span><span class="p">,</span><span class="s2">&quot;vote_average&quot;</span><span class="p">])</span>
+
+<span class="c1"># appends a record to DataFrame</span>
 <span class="k">def</span> <span class="nf">append_row</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">genre</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">vote_avg</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">df2</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;genre&quot;</span><span class="p">:</span> <span class="n">genre</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span> <span class="s2">&quot;vote_average&quot;</span><span class="p">:</span> <span class="n">vote_avg</span><span class="p">},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
+<span class="c1"># iterate through original DataFrame and split each record into a few records with single value of genre,</span>
+<span class="c1"># and add them to a new DataFrame</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
     <span class="n">genres</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">genres</span>
     <span class="n">year</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">release_year</span>
@@ -13225,7 +13235,8 @@ Older movies got a little bit higher rating and newer movies got lower rating.</
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">bar_chart</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plot bar chart</span>
+<span class="k">def</span> <span class="nf">bar_chart</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)),</span> <span class="n">data</span><span class="p">,</span> <span class="n">tick_label</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
@@ -13243,7 +13254,8 @@ Older movies got a little bit higher rating and newer movies got lower rating.</
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bar_chart</span><span class="p">(</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plot genres</span>
+<span class="n">bar_chart</span><span class="p">(</span>
     <span class="n">df2</span><span class="o">.</span><span class="n">genre</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="s2">&quot;Movies by genre&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Movies&quot;</span>
@@ -13299,7 +13311,8 @@ Older movies got a little bit higher rating and newer movies got lower rating.</
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bar_chart</span><span class="p">(</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plot rating by genre</span>
+<span class="n">bar_chart</span><span class="p">(</span>
     <span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;genre&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">vote_average</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="s2">&quot;Rating by genre&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Rating&quot;</span>
@@ -13355,8 +13368,15 @@ Older movies got a little bit higher rating and newer movies got lower rating.</
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>By analyzing this IMDB dataset we found out what kind of movies got higher user rating:<br>
-short (with runtime &lt; 70), older (with release year before 2000), documentaries.</p>
+<p>Even though the data set had some missing values for <strong>runtime</strong> and <strong>genre</strong>, I think it didn't affect our analysis. We were able to answer the questions asked in the beginning:</p>
+<ul>
+<li>Are long or short movies get higher user rating?</li>
+<li>Are old or new movies get higher user rating?</li>
+<li>What genres are the most popular in this dataset?</li>
+<li>What genres are getting higher rating?  </li>
+</ul>
+<p>By analyzing this IMDB dataset we found out, that the most popular genre is Drama, and what kind of movies got higher user rating: short (with runtime &lt; 70), older (with release year before 2000), documentaries.<br>
+These conclusions apply only to the given dataset and can't be extrapolated to the all movies in general.</p>
 
 </div>
 </div>
